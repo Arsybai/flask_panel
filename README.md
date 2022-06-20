@@ -4,12 +4,12 @@ Just like a CPanel. but it's for python Flask only.
 The reason I make this is because my personal problem that I always manually deploy my app to my server.
 
 ### Feature
-[x] MySQL Database
-[x] phpMyAdmin
-[ ] File Manager
-[ ] Backup
-[ ] Git
-[ ] SLL Let's encrypt
+- [x] MySQL Database
+- [x] phpMyAdmin
+- [ ] File Manager
+- [ ] Backup
+- [ ] Git
+- [ ] SLL Let's encrypt
 
 _note: the unchecked will added soon_
 

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases ~ Flask Panel</title>
+    <meta name="description" content="Easy deploy flask application on ubuntu server">
+    <link rel="shortcut icon" href="https://images.arsybai.app/images/SCbWjUOTMw.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <style>
+        .card {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body style="height: 100vh;">
+    <div class="container" style="margin-top:50px;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{category}}">{{message}}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-secondary">Create Database</h3>
+                <hr>
+                <form action="/databases/create" method="post">
+                    <div class="form-group">
+                        <label for="" class="text-secondary">Database Name</label>
+                        <input type="text" class="form-control" name="data" placeholder="testDB" required>
+                    </div>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 10px;"><i class="bi-send"></i> Submit</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-secondary">Create User</h3>
+                <hr>
+                <form action="/databases/user/create" method="post">
+                    <div class="form-group">
+                        <label for="" class="text-secondary">Username</label>
+                        <input type="text" class="form-control" name="username" placeholder="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="text-secondary">Password</label>
+                        <input type="text" class="form-control" name="password" placeholder="password" required>
+                    </div>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 10px;"><i class="bi-send"></i> Submit</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-secondary">Grant User</h3>
+                <hr>
+                <form action="/databases/grant" method="post">
+                    <div class="form-group">
+                        <label for="" class="text-secondary">Grant all privileges on </label>
+                        <select name="database" id="" class="form-control">
+                            <option value="" selected disabled>-- Choose Database --</option>
+                            {% for db in dbs %}
+                            <option value="{{db.db_name}}">{{db.db_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="text-secondary">to </label>
+                        <select name="user" id="" class="form-control">
+                            <option value="" selected disabled>-- Choose User --</option>
+                            {% for user in users %}
+                            <option value="{{user.username}}">{{user.username}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 10px;"><i class="bi-send"></i> Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <hr>
+
+        <h3 class="text-secondary">User with privileges</h3>
+        {% for i in users %}
+        <p><code>{{i.username}}</code> TO <code>{{i.privileges}}</code></p>
+        {% endfor %}
+
+        <hr>
+        <p class="text-center"><i>Made with <i class="bi-heart-fill"></i> by <a href="https://arsybai.com">Arsybai</a></i></p>
+    </div>
+</body>
+</html>

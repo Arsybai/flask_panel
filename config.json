@@ -1,0 +1,13 @@
+{
+    "admin":{
+        "username":"admin",
+        "password":".Admin1234"
+    },
+
+    "server_name": {
+        "flask_panel": "panel.example.com",
+        "phpmyadmin":"database.example.com"
+    },
+
+    "phpver": "8.1"
+}
